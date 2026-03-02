@@ -1,0 +1,15 @@
+// define Publisher type
+type PublisherProps = {
+    name: string;
+    yearFounded: number;
+}
+
+// props act as input params whenver this component is rendered
+export default function Publisher({ name, yearFounded }: PublisherProps) {
+    return (
+        <article className="card">
+            <h3>{name}</h3>
+            <p>Founded: {yearFounded}</p>
+        </article>
+    )
+}
