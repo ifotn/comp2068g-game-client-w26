@@ -2,7 +2,7 @@ import { Game } from "@/types/game";
 
 async function getGames(): Promise<Game[]> {
      // use router to call server api
-    const res: Response = await fetch('http://localhost:3000/api/games');
+    const res: Response = await fetch(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/games`);
     if (!res.ok) { throw new Error('Failed to fetch games') };
 
     // response is ok, so convert json to array of Game objects
@@ -19,7 +19,7 @@ export default async function Games() {
             <h1>Our Games</h1>
             <ul>
                 {games.map((game) => (
-                    <li key={game._id}>{game.title}</li>
+                    <li key={game._id} className="card">{game.title}</li>
                 ))}
             </ul>
         </main>
