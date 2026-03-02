@@ -1,4 +1,5 @@
 import { Game } from "@/types/game";
+import Link from "next/link";
 
 async function getGames(): Promise<Game[]> {
      // use router to call server api
@@ -19,7 +20,12 @@ export default async function Games() {
             <h1>Our Games</h1>
             <ul>
                 {games.map((game) => (
-                    <li key={game._id} className="card">{game.title}</li>
+                    <li key={game._id} className="card">
+                        <h3>{game.title}</h3>
+                        <Link href={`/games/${game._id}`}>
+                            <button>View Details</button>
+                        </Link>
+                    </li>
                 ))}
             </ul>
         </main>
