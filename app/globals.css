@@ -103,3 +103,14 @@ label {
 fieldset {
  margin-bottom: 10px;
 }
+
+.error {
+  color: firebrick;
+  font-weight: 600;
+  margin: 2px;
+}
+
+button.delete {
+  background-color: firebrick;
+  color: white;
+}
