@@ -1,10 +1,18 @@
 'use client';
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function CreateGame() {
+    // instantiate router for redirecting after successful save
+    const router = useRouter();
+
     // state vars
     const [title, setTitle] = useState<string>('');
+    const [developer, setDeveloper] = useState<string>('');
+    const [genre, setGenre] = useState<string>('');
+    const [price, setPrice] = useState<string>('');
+    const [rating, setRating] = useState<string>('');
 
     // state var key/val dictionary of validation errors in form
     const [errors, setErrors] = useState<Record<string, string>>({});
@@ -15,6 +23,8 @@ export default function CreateGame() {
         
         // create new error key/val pair if title is empty
         if (!title.trim()) newErrors.title = 'Title is Required';
+        if (!developer.trim()) newErrors.developer = 'Developer is Required';
+        if (!genre.trim()) newErrors.genre = 'Genre is Required';
 
         // update error state dict
         setErrors(newErrors);
@@ -34,11 +44,24 @@ export default function CreateGame() {
         e.preventDefault();
 
         if (!validate()) {
-            alert('Invalid Form');
             return;
         }
         else {
-            alert('Valid Form.  Will submit next');
+            // call route which calls api
+            const res: Response = await fetch(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/games`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'applcation/json' },
+                body: JSON.stringify({
+                    title, developer, genre, price : price ? parseFloat(price) : null, rating
+                })
+            });
+
+            if (!res.ok) {
+                alert('Failed to save game');
+            }
+
+            // ok, refresh games list
+            router.push('/games');
         }
     }
 
@@ -52,20 +75,22 @@ export default function CreateGame() {
                     {errors.title && <span className="error">{errors.title}</span>}
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="publisher">Publisher: *</label>
-                    <input name="publisher" id="publisher" />
+                    <label htmlFor="developer">Developer: *</label>
+                    <input name="developer" id="developer" value={developer} onChange={(e) => setDeveloper(e.target.value)} />
+                    {errors.developer && <span className="error">{errors.developer}</span>}
                 </fieldset>
                 <fieldset>
                     <label htmlFor="genre">Genre: *</label>
-                    <input name="genre" id="genre" />
-                    </fieldset>
+                    <input name="genre" id="genre" value={genre} onChange={(e) => setGenre(e.target.value)} />
+                    {errors.genre && <span className="error">{errors.genre}</span>}
+                </fieldset>
                 <fieldset>
                     <label htmlFor="price">Price:</label>
-                    <input name="price" id="price" />
+                    <input name="price" id="price" value={price} onChange={(e) => setPrice(e.target.value)} type="number" step="0.01" />
                     </fieldset>
                 <fieldset>
                     <label htmlFor="rating">Rating: </label>
-                    <input name="rating" id="rating" />
+                    <input name="rating" id="rating" value={rating} onChange={(e) => setRating(e.target.value)} />
                 </fieldset>
                 <button>Save</button>
             </form>
