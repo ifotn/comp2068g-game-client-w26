@@ -62,7 +62,7 @@ h3 {
  margin: 1rem;     
 }
 
-button {
+button, .linkButton {
  background-color: #3b82f6;
  color: #ffffff;
  font-weight: 700;
@@ -72,6 +72,7 @@ button {
  padding-left: 1rem;
  padding-right: 1rem;
  border: none;
+ margin: 2rem;
 }
 
 button:hover {

@@ -18,7 +18,7 @@ export default async function Games() {
    return (
         <main>
             <h1>Our Games</h1>
-            <Link href="/games/create">Add a New Game</Link>
+            <Link href="/games/create" className="linkButton">Add a New Game</Link>
             <ul>
                 {games.map((game) => (
                     <li key={game._id} className="card">
