@@ -62,6 +62,11 @@ h3 {
  margin: 1rem;     
 }
 
+button.delete {
+  background-color: firebrick;
+  color: white;
+}
+
 button, .linkButton {
  background-color: #3b82f6;
  color: #ffffff;
@@ -110,7 +115,3 @@ fieldset {
   margin: 2px;
 }
 
-button.delete {
-  background-color: firebrick;
-  color: white;
-}

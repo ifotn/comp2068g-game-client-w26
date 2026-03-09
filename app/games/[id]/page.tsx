@@ -1,4 +1,5 @@
 import { Game } from "@/types/game";
+import DeleteGameButton from "@/app/components/deleteGameButton";
 
 // call route which calls api to fetch game data
 async function getGame(id: string): Promise<Game> {
@@ -23,6 +24,7 @@ export default async function GameDetails({ params } : {params: Promise<{ id: st
                     <p>{game.genre}</p>
                     <p>{game.price}</p>
                     <p>Rating: {game.rating}</p>
+                    <DeleteGameButton id={game._id} />
                 </article>
             </main>
         );
