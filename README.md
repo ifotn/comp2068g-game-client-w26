@@ -26,4 +26,9 @@ npm i --save-dev eslint-config-next@latest
 npm audit fix
 ```
 
-The we need to push again to GitHub to trigger a Vercel redeployment.
+Then we need to push again to GitHub to trigger a Vercel redeployment.
+
+Vercel Pre-Render Bug Fix During Build:
+
+// skip pre-rendering to fix vercel build bug.  On list page that fetches data automatically
+export const dynamic = 'force-dynamic';
