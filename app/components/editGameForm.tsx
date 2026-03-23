@@ -60,6 +60,7 @@ export default function EditGameForm({ game }: { game: Game}) {
 
             if (!res.ok) {
                 alert('Failed to update game');
+                return;
             }
 
             // ok, refresh games list

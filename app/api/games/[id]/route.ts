@@ -35,7 +35,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
     const { id } = await params;
 
     // get request body
-    const body = req.body;
+    const body = await req.json();
 
     // call delete with id on server api
     const res: Response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/games/${id}`, { 
@@ -44,6 +44,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
         body: JSON.stringify(body)
     });
 
+    console.log(`res: ${res}`);
     // error handle
     if (!res.ok) throw new Error('Failed to update game');
 
