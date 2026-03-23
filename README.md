@@ -31,4 +31,7 @@ Then we need to push again to GitHub to trigger a Vercel redeployment.
 Vercel Pre-Render Bug Fix During Build:
 
 // skip pre-rendering to fix vercel build bug.  On list page that fetches data automatically
+
+```bash
 export const dynamic = 'force-dynamic';
+```
