@@ -1,9 +1,13 @@
 'use client';
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAppContext } from "@/app/components/appContext";
 
 export default function CreateGame() {
+    // get auth status from global context
+    const { isAuthenticated } = useAppContext();
+
     // instantiate router for redirecting after successful save
     const router = useRouter();
 
@@ -65,6 +69,12 @@ export default function CreateGame() {
         }
     }
 
+    if (!isAuthenticated) return (
+        <main>
+            <h1>Unauthorized</h1>
+        </main>
+    );
+
     return (
         <main>
             <h1>Game Details</h1>
@@ -95,5 +105,5 @@ export default function CreateGame() {
                 <button>Save</button>
             </form>
         </main>
-    )
+    );
 }

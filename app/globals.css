@@ -115,3 +115,6 @@ fieldset {
   margin: 2px;
 }
 
+.navLink {
+  cursor: pointer;
+}

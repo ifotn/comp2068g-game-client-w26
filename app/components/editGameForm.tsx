@@ -3,9 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Game } from "@/types/game";
+import { useAppContext } from "./appContext";
 
 // edit form should be pre-filled so it accepts a Game prop
 export default function EditGameForm({ game }: { game: Game}) {
+    // auth check
+    const { isAuthenticated } = useAppContext();
+
     // instantiate router for redirecting after successful save
     const router = useRouter();
 
@@ -68,6 +72,12 @@ export default function EditGameForm({ game }: { game: Game}) {
         }
     }
 
+    if (!isAuthenticated) return (
+        <main>
+            <h1>Unauthorized</h1>
+        </main>
+    );
+    
     return (
         <main>
             <h1>Game Details</h1>

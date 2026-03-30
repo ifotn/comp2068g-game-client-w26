@@ -2,8 +2,12 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAppContext } from "@/app/components/appContext";
 
 export default function Login() {
+    // global context var setters
+    const { setAppUsername, setIsAuthenticated } = useAppContext();
+
     const router = useRouter();
 
     // state vars
@@ -43,7 +47,9 @@ export default function Login() {
             return;
         }
 
-        // ok => redirect to games
+        // ok => set global vars then redirect to games
+        setAppUsername(username);
+        setIsAuthenticated(true);
         router.push('/games');
     }
 
