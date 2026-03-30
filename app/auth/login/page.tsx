@@ -49,8 +49,8 @@ export default function Login() {
 
         // ok => set global vars then redirect to games
         setAppUsername(username);
-        setIsAuthenticated(true);
-        router.push('/games');
+        //setIsAuthenticated(true); => moved to 2fa success
+        router.push('/auth/verify-otp');
     }
 
     return (

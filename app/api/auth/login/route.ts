@@ -18,14 +18,15 @@ export async function POST(req: Request) {
     }
 
     // api call succeeds & returns 200, plus header containing our cookie w/jwt
+    // now moved to verify-otp for 2fa
     // need to pass cookie to client so we have it for private api calls
-    const setCookieHeader = res.headers.get('set-cookie');
-    const responseHeaders = new Headers();
+    // const setCookieHeader = res.headers.get('set-cookie');
+    // const responseHeaders = new Headers();
 
-    if (setCookieHeader) {
-        responseHeaders.set('Set-Cookie', setCookieHeader);
-    }
+    // if (setCookieHeader) {
+    //     responseHeaders.set('Set-Cookie', setCookieHeader);
+    // }
 
     // return success response + http header that contains cookie w/jwt
-    return Response.json({ success: true }, { headers: responseHeaders });
+    return Response.json({ success: true }); //, { headers: responseHeaders });
 }
